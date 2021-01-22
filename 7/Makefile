@@ -3,7 +3,7 @@
 PHP_VER ?= 7.4.14
 PHP_VER_MINOR ?= $(shell echo "${PHP_VER}" | grep -oE '^[0-9]+\.[0-9]+')
 
-REPO = wodby/php
+REPO = sensedrive/php
 NAME = php-$(PHP_VER_MINOR)
 
 PECL_HTTP_PROXY ?= ""
@@ -39,7 +39,8 @@ endif
 default: build
 
 build:
-	docker build -t $(REPO):$(TAG) \
+	docker buildx -t $(REPO):$(TAG) \
+		--platform linux/amd64,linux/arm64,linux/arm/v7 \
 		--build-arg PHP_VER=$(PHP_VER) \
 		--build-arg PHP_DEV=$(PHP_DEV) \
 		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
