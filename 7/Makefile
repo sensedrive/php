@@ -39,7 +39,7 @@ endif
 default: build
 
 build:
-	docker buildx -t $(REPO):$(TAG) \
+	docker buildx build -t $(REPO):$(TAG) \
 		--platform linux/amd64,linux/arm64,linux/arm/v7 \
 		--build-arg PHP_VER=$(PHP_VER) \
 		--build-arg PHP_DEV=$(PHP_DEV) \
